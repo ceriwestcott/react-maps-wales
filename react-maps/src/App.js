@@ -1,7 +1,11 @@
 import Container from "react-bootstrap/Container";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Map from "./components/Map";
+import { Row, Col } from "react-bootstrap";
+import ReactTooltip from "react-tooltip";
 
+import InfoContainer from "./components/layout/info-container";
+import Controls from "./components/layout/controls";
 <link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -10,11 +14,28 @@ import Map from "./components/Map";
 />;
 
 function App() {
-  const [toolTipContent, setToolTipContent] = useState("");
+  const [area, setArea] = useState({});
+  const [filter, setFilter] = useState("");
+
+  useEffect(() => {}, [area]);
+
   return (
     <div>
       <Container fluid>
-        <Map />
+        <Row>
+          <Controls setFilter={setFilter} />
+          <Col>
+            <Map setArea={setArea} filter={filter} />
+          </Col>
+          <Col>
+            <InfoContainer
+              area={area.name}
+              areaWelsh={area.welsh_name}
+              image={area.image}
+              population={area.population}
+            ></InfoContainer>
+          </Col>
+        </Row>
       </Container>
     </div>
   );

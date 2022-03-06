@@ -1,5 +1,10 @@
-import { useState, useEffect } from "react";
-import { geo_url } from "../constants/constants";
+import { useState, useEffect, Fragment } from "react";
+import {
+  geo_url,
+  mapStyleConfig,
+  POPULATION,
+  town_names,
+} from "../constants/constants";
 import { scaleLinear } from "d3-scale";
 import { memo } from "react";
 import {
@@ -13,9 +18,9 @@ import {
 } from "react-simple-maps";
 import { geo_json } from "../constants/geo";
 
-const colorScale = scaleLinear().domain(0, 6300000).range([]);
+const colorScale = scaleLinear().domain(55000, 400000).range([]);
 
-const Map = ({ scale }) => {
+const Map = ({ setArea, filter }) => {
   const [countries, setCountries] = useState([]);
   const [position, setPosition] = useState({
     coordinates: [-3.876032031877137, 52.38843330233102],
@@ -39,44 +44,67 @@ const Map = ({ scale }) => {
     setCountries(JSON.stringify(geo_json));
   };
 
+  const handleChange = (townName) => {
+    switch (filter) {
+      case POPULATION:
+        return colorScale(
+          town_names.find((x) => x.name === townName).population
+        );
+      default:
+        return "";
+    }
+  };
   useEffect(() => {
     getData();
   }, []);
 
+  useEffect(() => {}, [filter]);
+
   return (
     <div className="App">
-      {JSON.stringify(position)}
-      <div style={{ width: "100vw", height: "100vh" }}>
+      <div style={{ width: "50wh", height: "50wh" }}>
         <ComposableMap
           width={900}
-          height={400}
+          height={1080}
           projectionConfig={{
             rotate: [-10, 0, 0],
-            scale: scale,
+            scale: 2000,
           }}
         >
-          {countries.length > 0 ? (
-            <ZoomableGroup
-              zoom={position.zoom}
-              center={position.coordinates}
-              onMoveEnd={handleMoveEnd}
-            >
-              <Geographies geography={geo_url}>
-                {({ geographies }) =>
-                  geographies.map((geo, index) => {
-                    return (
-                      <>
-                        <Geography key={index} geography={geo} />
-                        <Annotation subject={[]}></Annotation>
-                      </>
-                    );
-                  })
-                }
-              </Geographies>
-            </ZoomableGroup>
-          ) : (
-            <p>Loading...</p>
-          )}
+          <ZoomableGroup
+            zoom={position.zoom}
+            center={position.coordinates}
+            onMoveEnd={handleMoveEnd}
+          >
+            <Geographies geography={geo_url}>
+              {({ geographies }) =>
+                geographies.map((geo, index) => {
+                  return (
+                    <Fragment key={index * 1000}>
+                      <Geography
+                        key={index}
+                        geography={geo}
+                        onClick={() => {
+                          const { LAD13NM } = geo.properties;
+                          setArea(town_names.find((x) => x.name === LAD13NM));
+                        }}
+                        style={mapStyleConfig}
+                        fill={
+                          filter
+                            ? colorScale(
+                                town_names.find(
+                                  (x) => x.name === geo.properties.LAD13NM
+                                ).population
+                              )
+                            : "#000"
+                        }
+                      />
+                    </Fragment>
+                  );
+                })
+              }
+            </Geographies>
+          </ZoomableGroup>
         </ComposableMap>
       </div>
     </div>
