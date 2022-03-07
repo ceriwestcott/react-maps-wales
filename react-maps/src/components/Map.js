@@ -1,29 +1,18 @@
 import { useState, useEffect, Fragment } from "react";
 import { scaleQuantize, scaleLinear } from "d3-scale";
 
-import {
-  geo_url,
-  mapStyleConfig,
-  POPULATION,
-  town_names,
-} from "../constants/constants";
+import { geo_url, mapStyleConfig, town_names } from "../constants/constants";
 import { memo } from "react";
 import {
   ComposableMap,
   Geographies,
   Geography,
-  Graticule,
-  Sphere,
-  Annotation,
   ZoomableGroup,
 } from "react-simple-maps";
 import { geo_json } from "../constants/geo";
 
-const colorScale = scaleLinear().domain(55000, 400000).range([]);
-
 const Map = ({ setArea, filter, setSelected, selected, area }) => {
-  const [countries, setCountries] = useState([]);
-  const [style, setStyle] = useState({});
+  const [countries, setCounties] = useState([]);
   const [position, setPosition] = useState({
     coordinates: [-3.876032031877137, 52.38843330233102],
     zoom: 4,
@@ -47,7 +36,7 @@ const Map = ({ setArea, filter, setSelected, selected, area }) => {
     //   .then((res) => res.json())
     //   .then((res) => setCountries(res));
 
-    setCountries(JSON.stringify(geo_json));
+    setCounties(JSON.stringify(geo_json));
   };
 
   useEffect(() => {
@@ -62,7 +51,6 @@ const Map = ({ setArea, filter, setSelected, selected, area }) => {
         <ComposableMap
           width={900}
           height={1080}
-          data-tip=""
           projectionConfig={{
             rotate: [-10, 0, 0],
             scale: 4000,
@@ -86,11 +74,9 @@ const Map = ({ setArea, filter, setSelected, selected, area }) => {
                           const { LAD13NM } = geo.properties;
                           if (selected && LAD13NM === area.name) {
                             setSelected(false);
-                            setStyle(mapStyleConfig.default);
                           } else {
                             setSelected(true);
                             setArea(town_names.find((x) => x.name === LAD13NM));
-                            setStyle(mapStyleConfig.hover);
                           }
                         }}
                         // onMouseEnter={() => {
@@ -98,7 +84,12 @@ const Map = ({ setArea, filter, setSelected, selected, area }) => {
                         //   if (!selected)
                         //     setArea(town_names.find((x) => x.name === LAD13NM));
                         // }}
-                        fill={colorScale(area.population)}
+                        style={!filter ? mapStyleConfig : ""}
+                        fill={colorScale(
+                          town_names.find(
+                            (x) => x.name === geo.properties.LAD13NM
+                          ).population
+                        )}
                       />
                     </Fragment>
                   );
@@ -108,9 +99,6 @@ const Map = ({ setArea, filter, setSelected, selected, area }) => {
           </ZoomableGroup>
         </ComposableMap>
       </div>
-      {JSON.stringify(
-        selected ? mapStyleConfig.hover.fill : mapStyleConfig.default.fill
-      )}
     </div>
   );
 };
