@@ -66,9 +66,10 @@ const Map = ({ setArea, filter }) => {
         <ComposableMap
           width={900}
           height={1080}
+          data-tip=""
           projectionConfig={{
             rotate: [-10, 0, 0],
-            scale: 2000,
+            scale: 4000,
           }}
         >
           <ZoomableGroup
@@ -82,9 +83,14 @@ const Map = ({ setArea, filter }) => {
                   return (
                     <Fragment key={index * 1000}>
                       <Geography
+                        data-tip={geo.properties.LAD13NM}
                         key={index}
                         geography={geo}
                         onClick={() => {
+                          const { LAD13NM } = geo.properties;
+                          setArea(town_names.find((x) => x.name === LAD13NM));
+                        }}
+                        onMouseEnter={() => {
                           const { LAD13NM } = geo.properties;
                           setArea(town_names.find((x) => x.name === LAD13NM));
                         }}
