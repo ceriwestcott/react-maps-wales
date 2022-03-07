@@ -6,6 +6,7 @@ import ReactTooltip from "react-tooltip";
 
 import InfoContainer from "./components/layout/info-container";
 import ControlPanel from "./components/layout/control-panel";
+import SplitScreen from "./components/display-components/split-screen";
 <link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -22,21 +23,18 @@ function App() {
   return (
     <div>
       <Container fluid>
-        <Row>
-          <ControlPanel setArea={setArea} area={area} />
-          <Col>
+        <SplitScreen>
+          <div>
             <Map setArea={setArea} filter={filter} />
-            <ReactTooltip>{area.name }</ReactTooltip>
-          </Col>
-          <Col>
-            <InfoContainer
-              area={area.name}
-              areaWelsh={area.welsh_name}
-              image={area.image}
-              population={area.population}
-            ></InfoContainer>
-          </Col>
-        </Row>
+            <ReactTooltip>{area.name}</ReactTooltip>
+          </div>
+          <InfoContainer
+            area={area.name}
+            areaWelsh={area.welsh_name}
+            image={area.image}
+            population={area.population}
+          ></InfoContainer>
+        </SplitScreen>
       </Container>
     </div>
   );
