@@ -5,7 +5,7 @@ import { Row, Col } from "react-bootstrap";
 import ReactTooltip from "react-tooltip";
 
 import InfoContainer from "./components/layout/info-container";
-import Controls from "./components/layout/controls";
+import ControlPanel from "./components/layout/control-panel";
 <link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -23,9 +23,10 @@ function App() {
     <div>
       <Container fluid>
         <Row>
-          <Controls setFilter={setFilter} />
+          <ControlPanel setArea={setArea} area={area} />
           <Col>
             <Map setArea={setArea} filter={filter} />
+            <ReactTooltip>{area.name }</ReactTooltip>
           </Col>
           <Col>
             <InfoContainer

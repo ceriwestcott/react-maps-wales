@@ -50,18 +50,20 @@ export const town_names = [
 export const mapStyleConfig = {
   default: {
     fill: "#ff6961",
-    outline: "#000",
+    outline: "1",
+    strokeWidth: "0.2",
+    stroke: "#fff",
     transition: "all 250ms",
   },
   hover: {
-    fill: "#C1E1C1",
-    outline: "none",
+    fill: "#52D452",
+    outline: "#123",
+    strokeWidth: "2px",
     transition: "all 250ms",
   },
   pressed: {
-    fill: "#E42",
+    fill: "#C1E1C1",
     outline: "none",
-    transition: "all 250ms",
   },
 };
 
