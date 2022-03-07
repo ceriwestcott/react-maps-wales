@@ -130,10 +130,6 @@ export const mapStyleConfig = {
     strokeWidth: "2px",
     transition: "all 250ms",
   },
-  pressed: {
-    fill: "#C1E1C1",
-    outline: "none",
-  },
 };
 
 export const POPULATION = "POPULATION";
