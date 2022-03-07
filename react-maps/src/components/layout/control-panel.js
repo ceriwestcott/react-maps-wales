@@ -3,7 +3,7 @@ import React from "react";
 import { town_names } from "../../constants/constants";
 import { getNextCounty, getPreviousCounty } from "../../services/utility";
 
-function ControlPanel({ setArea, area }) {
+function ControlPanel({ setArea, area, setFilter }) {
   return (
     <div>
       <button
@@ -23,6 +23,14 @@ function ControlPanel({ setArea, area }) {
         }}
       >
         previous County
+      </button>
+      <button
+        type="button"
+        onClick={() => {
+          setFilter("POPULATION");
+        }}
+      >
+        Population Ranked
       </button>
     </div>
   );

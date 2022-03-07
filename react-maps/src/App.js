@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import Map from "./components/Map";
 import { Row, Col } from "react-bootstrap";
 import ReactTooltip from "react-tooltip";
-
-import InfoContainer from "./components/layout/info-container";
+import StatsContainer from "./components/display-components/statsContainer";
+import CountyContainers from "./components/layout/county-containers";
 import ControlPanel from "./components/layout/control-panel";
 import SplitScreen from "./components/display-components/split-screen";
 import InfoContainer2 from "./components/layout/cards/info-container-2";
@@ -20,6 +20,14 @@ function App() {
   const [selected, setSelected] = useState(false);
   const [filter, setFilter] = useState("");
 
+  const toggleFilter = (state = null) => {
+    debugger;
+    if (state && state !== filter) {
+      setFilter(state);
+    } else {
+      setFilter("");
+    }
+  };
   useEffect(() => {}, [area]);
 
   return (
@@ -27,6 +35,11 @@ function App() {
       <Container fluid>
         <SplitScreen>
           <div>
+            <ControlPanel
+              setArea={setArea}
+              area={area}
+              setFilter={toggleFilter}
+            />
             <Map
               setArea={setArea}
               setSelected={setSelected}
@@ -36,14 +49,17 @@ function App() {
             />
             <ReactTooltip>{area.name}</ReactTooltip>
           </div>
-
-          <InfoContainer2
-            area={area.name}
-            areaWelsh={area.welsh_name}
-            image={area.image_url}
-            population={area.population}
-            summary={area.summary}
-          ></InfoContainer2>
+          {filter ? (
+            <StatsContainer filter={filter} />
+          ) : (
+            <InfoContainer2
+              area={area.name}
+              areaWelsh={area.welsh_name}
+              image={area.image_url}
+              population={area.population}
+              summary={area.summary}
+            ></InfoContainer2>
+          )}
         </SplitScreen>
       </Container>
     </div>
