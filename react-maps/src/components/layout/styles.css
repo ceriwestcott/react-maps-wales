@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+.max-width {
+  max-width: 100%;
+  max-height: 100%;
+}
+
 a {
   color: rgb(255, 105, 97) !important;
 }

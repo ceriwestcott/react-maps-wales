@@ -5,7 +5,8 @@ export const town_names = [
   {
     name: "Isle of Anglesey",
     welsh_name: "Ynys Mon",
-    image_url: "src/media/merthyr-master-cmyk.jpg",
+    image_url:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Flag_of_Anglesey.svg/1200px-Flag_of_Anglesey.svg.png",
     population: 70440,
     summary:
       "Anglesey (/ˈæŋɡəlsiː/; Welsh: Ynys Môn [ˈənɨs ˈmoːn]) is an island off the north-west coast of Wales. It forms a principal area known as the Isle of Anglesey, that includes Holy Island across the narrow Cymyran Strait and some islets and skerries.[1] Anglesey island, at 260 square miles (673 km2), is the largest in Wales, the seventh largest in Britain, largest in the Irish Sea and second most populous there after the Isle of Man. Isle of Anglesey County Council covers 276 square miles (715 km2),[2] with a 2011 census population of 69,751,[3] including 13,659 on Holy Island. The Menai Strait to the mainland is spanned by the Menai Suspension Bridge, designed by Thomas Telford in 1826, and the Britannia Bridge, built in 1850 and replaced in 1980. The largest town is Holyhead on Holy Island, whose ferry service with Ireland handles over two million passengers a year.[4] The next largest is Llangefni, the county council seat. From 1974 to 1996 Anglesey was part of Gwynedd.[5] Most full-time residents are habitual Welsh speakers.[6] The Welsh name Ynys Môn is used for the UK Parliament and Senedd (Welsh Parliament) constituencies. The postcodes are LL58–LL78. It is also a historic county of Wales.[7]",
@@ -13,6 +14,8 @@ export const town_names = [
   {
     name: "Gwynedd",
     welsh_name: "Gwynedd",
+    image_url: "src/media/merthyr-master-cmyk.jpg",
+
     population: 125171,
     summary:
       "Gwynedd (English: /ˈɡwɪnɪð/; Welsh: [ˈɡʊɨnɛð]) is a county and preserved county (latter with differing boundaries; includes the Isle of Anglesey) in the north-west of Wales. It shares borders with Powys, Conwy County Borough, Denbighshire, Anglesey over the Menai Strait, and Ceredigion over the River Dyfi. The scenic Llŷn Peninsula and most of Snowdonia National Park are in Gwynedd. Bangor is the home of Bangor University.",

@@ -1,5 +1,6 @@
 import React from "react";
 import "../styles.css";
+
 import { FaChild } from "react-icons/fa";
 
 function InfoContainer2({
@@ -13,6 +14,9 @@ function InfoContainer2({
     <div class="box red">
       <h2>{area}</h2>
       <p>{areaWelsh}</p>
+      <hr />
+      <img src={image} className="max-width" />
+      <br />
       <p>
         <FaChild />
         {population}

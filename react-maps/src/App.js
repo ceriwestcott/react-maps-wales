@@ -33,7 +33,7 @@ function App() {
           <InfoContainer2
             area={area.name}
             areaWelsh={area.welsh_name}
-            image={area.image}
+            image={area.image_url}
             population={area.population}
             summary={area.summary}
           ></InfoContainer2>
