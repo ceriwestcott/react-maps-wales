@@ -17,6 +17,7 @@ import InfoContainer2 from "./components/layout/cards/info-container-2";
 
 function App() {
   const [area, setArea] = useState({});
+  const [selected, setSelected] = useState(false);
   const [filter, setFilter] = useState("");
 
   useEffect(() => {}, [area]);
@@ -26,7 +27,13 @@ function App() {
       <Container fluid>
         <SplitScreen>
           <div>
-            <Map setArea={setArea} filter={filter} />
+            <Map
+              setArea={setArea}
+              setSelected={setSelected}
+              area={area}
+              selected={selected}
+              filter={filter}
+            />
             <ReactTooltip>{area.name}</ReactTooltip>
           </div>
 

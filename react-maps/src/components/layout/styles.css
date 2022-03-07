@@ -9,6 +9,12 @@
   max-height: 100%;
 }
 
+.pressed {
+  fill: "#52D452";
+  strokewidth: "0.2px";
+  transition: "all 250ms";
+}
+
 a {
   color: rgb(255, 105, 97) !important;
 }
