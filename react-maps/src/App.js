@@ -7,6 +7,7 @@ import ReactTooltip from "react-tooltip";
 import InfoContainer from "./components/layout/info-container";
 import ControlPanel from "./components/layout/control-panel";
 import SplitScreen from "./components/display-components/split-screen";
+import InfoContainer2 from "./components/layout/cards/info-container-2";
 <link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -28,12 +29,14 @@ function App() {
             <Map setArea={setArea} filter={filter} />
             <ReactTooltip>{area.name}</ReactTooltip>
           </div>
-          <InfoContainer
+
+          <InfoContainer2
             area={area.name}
             areaWelsh={area.welsh_name}
-            image={area.image}
+            image={area.image_url}
             population={area.population}
-          ></InfoContainer>
+            summary={area.summary}
+          ></InfoContainer2>
         </SplitScreen>
       </Container>
     </div>
